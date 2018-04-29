@@ -10,16 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.schoolsystem.schoolsystemweb.model.Aluno;
-import br.schoolsystem.schoolsystemweb.model.Pessoa;
 import br.schoolsystem.schoolsystemweb.model.enums.TipoDeAluno;
-import br.schoolsystem.schoolsystemweb.repositories.PessoaRepository;
+import br.schoolsystem.schoolsystemweb.repositories.AlunoRepository;
 
 @RestController
 @RequestMapping("/aluno")
 public class AlunoResource {
 	
 	@Autowired
-	private PessoaRepository alunoRepositoty;
+	private AlunoRepository alunoRepositoty;
 	
 	@GetMapping("/iniciar")
 	public String iniciar(){
@@ -39,11 +38,9 @@ public class AlunoResource {
 	
 	@GetMapping("/{id}")
 	public Aluno buscar(@PathVariable Integer id) {
-		Pessoa p =  alunoRepositoty.findById(id).get();
+		Aluno a =  alunoRepositoty.findById(id).get();
 		
-		if(p instanceof Aluno)
-			return (Aluno)p;
-		else return null;
+		return a;
 	}
 	   
 	@GetMapping("/listar")

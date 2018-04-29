@@ -32,11 +32,12 @@ public class CursoResource {
 	
 	@GetMapping("/pesquisar")
 	public List<Curso> pesquisar(@RequestParam("nome") String nome){
-		System.out.println(">>>>>"+nome);
 		List<Curso> cursos = cursoRepository.findByNomeContaining(nome);
 		
 		return cursos;
 	}
+	
+	
 	
 	@GetMapping("/deletar/{id}")
 	public void deletar(@PathVariable Integer id) {

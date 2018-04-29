@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -15,6 +17,7 @@ import javax.persistence.Table;
 public class Escola {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
 	@Column
@@ -36,6 +39,10 @@ public class Escola {
 		this.nome = nome;
 		this.professores = new ArrayList<Professor>();
 		this.cursos = new ArrayList<Curso>();
+	}
+	
+	public Escola(String nome){
+		this.nome = nome;
 	}
 
 	public Integer getId() {

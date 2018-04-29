@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import br.schoolsystem.schoolsystemweb.model.Aluno;
 import br.schoolsystem.schoolsystemweb.model.Pessoa;
 
-public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
+public interface AlunoRepository extends JpaRepository<Aluno, Integer> {
 	List<Pessoa> findByNomeLike(String nome);
 	
 	

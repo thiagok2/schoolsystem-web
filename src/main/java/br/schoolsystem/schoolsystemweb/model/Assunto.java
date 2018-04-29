@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "assunto")
 public class Assunto {
@@ -19,6 +21,7 @@ public class Assunto {
 	private String nome;
 	
 	@ManyToOne
+	@JsonIgnore
 	private Disciplina disciplina;
 
 	public Assunto() {

@@ -3,17 +3,30 @@ package br.schoolsystem.schoolsystemweb.model;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import br.schoolsystem.schoolsystemweb.model.enums.TipoProfessor;
 
 @Entity
-@DiscriminatorValue("P")
-public class Professor extends Pessoa{
+public class Professor{
+	
+	@Id
+	@GeneratedValue
+	private Integer id;
+	
+	@Column
+	private String nome;
+	
+	@Column
+	private int idade;
+	
+	@Column
+	private char sexo;
 	
 	@Column
 	private String formacao;
@@ -35,6 +48,46 @@ public class Professor extends Pessoa{
 		
 	}
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+	public char getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(char sexo) {
+		this.sexo = sexo;
+	}
+
+	public TipoProfessor getTipoProfessor() {
+		return tipoProfessor;
+	}
+
+	public void setTipoProfessor(TipoProfessor tipoProfessor) {
+		this.tipoProfessor = tipoProfessor;
+	}
+
 	public String getFormacao() {
 		return formacao;
 	}

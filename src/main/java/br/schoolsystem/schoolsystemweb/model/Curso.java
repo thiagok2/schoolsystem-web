@@ -1,10 +1,13 @@
 package br.schoolsystem.schoolsystemweb.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,6 +21,7 @@ public class Curso implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
 	@Column
@@ -25,27 +29,25 @@ public class Curso implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany
-	private List<Aluno> alunos;
+	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
 	@JsonIgnore
 	@OneToMany
-	private List<Disciplina> disciplinas;
+	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
 	
 	public Curso() {
 		super();
 	}
 
-	public Curso(Integer id, String nome, List<Aluno> alunos, List<Disciplina> disciplinas) {
+	public Curso(String nome, List<Aluno> alunos, List<Disciplina> disciplinas) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.alunos = alunos;
 		this.disciplinas = disciplinas;
 	}
 
-	public Curso(int id, String nome) {
-		this.id = id;
+	public Curso(String nome) {
 		this.nome = nome;
 	}
 

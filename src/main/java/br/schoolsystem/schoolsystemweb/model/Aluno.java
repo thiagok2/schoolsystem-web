@@ -1,5 +1,6 @@
 package br.schoolsystem.schoolsystemweb.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -34,10 +35,10 @@ public class Aluno{
 	private String matricula;
 
 	@ManyToMany
-	private List<Disciplina> disciplinas;
+	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
 	@ElementCollection
-	private List<String> telefones;
+	private List<String> telefones = new ArrayList<String>();
 
 	@Column(name = "aluno_Enum", nullable = true)
 	@Enumerated(EnumType.STRING)
@@ -162,6 +163,11 @@ public class Aluno{
 	@Override
 	public String toString() {
 		return "Aluno [matricula=" + matricula + ", disciplinas=" + disciplinas + "]";
+	}
+
+	public void addDisciplina(Disciplina disciplina) {
+		if(!disciplinas.contains(disciplina))
+			disciplinas.add(disciplina);
 	}
 	
 	

@@ -24,10 +24,10 @@ public class Escola {
 	private String nome;
 	
 	@ManyToMany
-	private List<Professor> professores;
+	private List<Professor> professores = new ArrayList<Professor>();
 	
 	@ManyToMany
-	private List<Curso> cursos;
+	private List<Curso> cursos = new ArrayList<Curso>();
 	
 	public Escola() {
 		

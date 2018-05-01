@@ -1,10 +1,14 @@
 package br.schoolsystem.schoolsystemweb.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -16,23 +20,48 @@ import javax.persistence.Table;
 public class Disciplina {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
 	@Column
 	private String nome;
 	
+	@Column
+	private Integer periodo;
+	
 	@ManyToMany
-	private List<Aluno> alunos;
+	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
 	@ManyToOne
 	private Professor professor;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	private List<Assunto> assunto;
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	private List<Assunto> assuntos = new ArrayList<Assunto>();
 	
 
 	public Disciplina() {
 		
+	}
+	
+	public void addAluno(Aluno a){
+		a.addDisciplina(this);
+		
+		if(!alunos.contains(a))
+			alunos.add(a);
+	}
+	
+	public void addAlunos(List<Aluno> alunos){
+		this.alunos.addAll(alunos);
+		
+		alunos.stream().forEach(a -> a.addDisciplina(this));
+	}
+	
+	public void addAssunto(String assunto){
+		Assunto a = new Assunto();
+		a.setNome(assunto);
+		a.setDisciplina(this);
+		
+		assuntos.add(a);
 	}
 
 	public Disciplina(Integer id, String nome, List<Aluno> alunos, Professor professor) {
@@ -75,12 +104,32 @@ public class Disciplina {
 		this.professor = professor;
 	}
 
+	public List<Assunto> getAssuntos() {
+		return assuntos;
+	}
+
+	public void setAssuntos(List<Assunto> assuntos) {
+		this.assuntos = assuntos;
+	}
+
+	public Integer getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(Integer periodo) {
+		this.periodo = periodo;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((alunos == null) ? 0 : alunos.hashCode());
-		result = prime * result + ((assunto == null) ? 0 : assunto.hashCode());
+		result = prime * result + ((assuntos == null) ? 0 : assuntos.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((professor == null) ? 0 : professor.hashCode());
@@ -101,10 +150,10 @@ public class Disciplina {
 				return false;
 		} else if (!alunos.equals(other.alunos))
 			return false;
-		if (assunto == null) {
-			if (other.assunto != null)
+		if (assuntos == null) {
+			if (other.assuntos != null)
 				return false;
-		} else if (!assunto.equals(other.assunto))
+		} else if (!assuntos.equals(other.assuntos))
 			return false;
 		if (id != other.id)
 			return false;

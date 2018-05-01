@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.schoolsystem.schoolsystemweb.model.Aluno;
+import br.schoolsystem.schoolsystemweb.model.Endereco;
 import br.schoolsystem.schoolsystemweb.model.enums.TipoDeAluno;
 import br.schoolsystem.schoolsystemweb.repositories.AlunoRepository;
 
@@ -23,14 +24,7 @@ public class AlunoResource {
 	@GetMapping("/iniciar")
 	public String iniciar(){
 		
-		
-		Aluno aluno = new Aluno("0002");
-		aluno.setIdade(19);
-		aluno.setNome("Bruna");
-		aluno.setSexo('F');
-		aluno.setTipoDeAluno(TipoDeAluno.BOLSAASSISTENCIA);
-		
-		alunoRepositoty.save(aluno);
+	
 		
 		return "";
 		

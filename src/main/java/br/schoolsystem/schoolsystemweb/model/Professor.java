@@ -1,5 +1,6 @@
 package br.schoolsystem.schoolsystemweb.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -32,16 +33,11 @@ public class Professor{
 	private String formacao;
 	
 	@OneToMany
-	private List<Disciplina> disciplinas;
+	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
 	@Column(name = "professor_Enum", nullable = true)
 	@Enumerated(EnumType.STRING)
 	private TipoProfessor tipoProfessor = TipoProfessor.EFETIVO;
-	
-	public Professor(String formacao) {
-		super();
-		this.formacao = formacao;
-	}
 		
 	public Professor() {
 		super();

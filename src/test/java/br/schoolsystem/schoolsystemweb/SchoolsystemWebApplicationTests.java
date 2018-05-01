@@ -15,6 +15,7 @@ import br.schoolsystem.schoolsystemweb.model.Aluno;
 import br.schoolsystem.schoolsystemweb.model.Assunto;
 import br.schoolsystem.schoolsystemweb.model.Curso;
 import br.schoolsystem.schoolsystemweb.model.Disciplina;
+import br.schoolsystem.schoolsystemweb.model.DisciplinaNota;
 import br.schoolsystem.schoolsystemweb.model.Endereco;
 import br.schoolsystem.schoolsystemweb.model.Escola;
 import br.schoolsystem.schoolsystemweb.model.Nota;
@@ -129,8 +130,8 @@ public class SchoolsystemWebApplicationTests {
 		
 	}
 	
-	@Test
-	@Transactional
+	//@Test
+	//@Transactional
 	public void testEscolaProfessor() {
 		Escola e = escolaRepository.findAll().get(0);
 		
@@ -142,8 +143,8 @@ public class SchoolsystemWebApplicationTests {
 		
 	}
 	
-	@Test
-	@Transactional
+	//@Test
+	//@Transactional
 	public void testDisciplina(){
 		Disciplina d = new Disciplina();
 		
@@ -161,8 +162,8 @@ public class SchoolsystemWebApplicationTests {
 		
 	}
 	
-	@Test
-	@Transactional
+	//@Test
+	//@Transactional
 	public void testDisciplinaAssunto(){
 		Disciplina d = disciplinaRepository.findAll().get(0);
 		
@@ -180,8 +181,8 @@ public class SchoolsystemWebApplicationTests {
 		//professorRepository.saveAndFlush(p);
 	}
 	
-	@Test
-	@Transactional
+	//@Test
+	//@Transactional
 	public void testDisciplinaPeriodo(){
 		List<String> disciplinas = disciplinaRepository.findNomeByPeriodo(1);
 		
@@ -191,8 +192,8 @@ public class SchoolsystemWebApplicationTests {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>...."+disciplinas.size());
 	}
 	
-	@Test
-	@Transactional
+	//@Test
+	//@Transactional
 	public void testDisciplinaAlunoNota(){
 		Disciplina d = disciplinaRepository.findAll().get(0);
 		
@@ -210,8 +211,8 @@ public class SchoolsystemWebApplicationTests {
 		//notaRepository.saveAndFlush(nota);
 	}
 	
-	@Test
-	@Transactional
+	//@Test
+	//@Transactional
 	public void testNotas(){
 		Disciplina d = disciplinaRepository.findAll().get(0);
 		
@@ -223,6 +224,18 @@ public class SchoolsystemWebApplicationTests {
 		System.out.println(notas.size());
 		
 		System.out.println(notas.get(0).getValor());
+		
+	}
+	
+	@Test
+	@Transactional
+	public void testDisciplinaNota(){
+		
+		Aluno a = alunoRepository.findAll().get(0);
+		
+		List<DisciplinaNota> disciplinasNotas = boletimRepository.getDisciplinaNota(a);
+		
+		System.out.println(">>"+disciplinasNotas.size());
 		
 	}
 

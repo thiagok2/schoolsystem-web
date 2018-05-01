@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.schoolsystem.schoolsystemweb.model.Aluno;
 import br.schoolsystem.schoolsystemweb.model.Disciplina;
+import br.schoolsystem.schoolsystemweb.model.DisciplinaNota;
 import br.schoolsystem.schoolsystemweb.model.Nota;
 
 @Repository
@@ -39,6 +40,19 @@ public class BoletimRepositoryImpl implements BoletimRepository {
 		
 		query.setParameter("alunoId", aluno.getId());
 		query.setParameter("disciplinaId", disciplina.getId());
+		return query.getResultList();
+	}
+
+	@Override
+	public List<DisciplinaNota> getDisciplinaNota(Aluno aluno) {
+		String querySQL = "SELECT new br.schoolsystem.schoolsystemweb.model.DisciplinaNota(n.disciplina.nome, n.mediaFinal) "
+				+ "FROM Nota n "
+				+ ""
+				+ "WHERE n.aluno.id = :alunoId"; 
+		
+		TypedQuery<DisciplinaNota> query = entityManager.createQuery(querySQL, DisciplinaNota.class);
+		
+		query.setParameter("alunoId", aluno.getId());
 		return query.getResultList();
 	}
 

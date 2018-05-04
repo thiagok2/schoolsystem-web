@@ -16,7 +16,7 @@ import br.schoolsystem.schoolsystemweb.repositories.DisciplinaRepository;
 import br.schoolsystem.schoolsystemweb.repositories.custom.BoletimRepository;
 
 @RestController
-@RequestMapping("/boletim")
+@RequestMapping("/api/boletim")
 public class BoletimResource {
 
 	@Autowired

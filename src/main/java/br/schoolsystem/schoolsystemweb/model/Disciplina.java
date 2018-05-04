@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="disciplina")
 public class Disciplina {
@@ -30,6 +32,7 @@ public class Disciplina {
 	private Integer periodo;
 	
 	@ManyToMany
+	@JsonIgnore
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
 	@ManyToOne

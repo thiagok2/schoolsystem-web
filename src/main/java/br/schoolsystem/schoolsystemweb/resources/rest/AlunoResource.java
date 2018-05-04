@@ -15,7 +15,7 @@ import br.schoolsystem.schoolsystemweb.model.enums.TipoDeAluno;
 import br.schoolsystem.schoolsystemweb.repositories.AlunoRepository;
 
 @RestController
-@RequestMapping("/aluno")
+@RequestMapping("/api/aluno")
 public class AlunoResource {
 	
 	@Autowired

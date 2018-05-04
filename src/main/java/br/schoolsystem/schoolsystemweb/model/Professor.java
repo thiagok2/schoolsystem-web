@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.schoolsystem.schoolsystemweb.model.enums.TipoProfessor;
 
 @Entity
@@ -33,6 +35,7 @@ public class Professor{
 	private String formacao;
 	
 	@OneToMany
+	@JsonIgnore
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
 	@Column(name = "professor_Enum", nullable = true)

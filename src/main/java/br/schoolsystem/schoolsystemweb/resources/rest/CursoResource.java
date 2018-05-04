@@ -13,7 +13,7 @@ import br.schoolsystem.schoolsystemweb.model.Curso;
 import br.schoolsystem.schoolsystemweb.repositories.CursoRepository;
 
 @RestController
-@RequestMapping("curso")
+@RequestMapping("/api/curso")
 public class CursoResource {
 	
 	@Autowired

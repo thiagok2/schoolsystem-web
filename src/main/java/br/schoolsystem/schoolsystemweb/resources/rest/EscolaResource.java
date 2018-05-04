@@ -13,7 +13,7 @@ import br.schoolsystem.schoolsystemweb.model.Escola;
 import br.schoolsystem.schoolsystemweb.repositories.EscolaRepository;
 
 @RestController
-@RequestMapping("/escola")
+@RequestMapping("/api/escola")
 public class EscolaResource {
 	
 	@Autowired

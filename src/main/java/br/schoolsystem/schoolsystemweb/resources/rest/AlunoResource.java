@@ -39,14 +39,7 @@ public class AlunoResource {
 	   
 	@GetMapping("/listar")
 	public List<Aluno> listar() {
-		
-		//return alunoRepositoty.listAluno();
-		
-		System.out.println("list alunos");
-		return alunoRepositoty.findAll().stream().filter(p -> p instanceof Aluno)
-				.map(Aluno.class::cast)
-				.collect(Collectors.toList());
-		
+		return alunoRepositoty.findAll();
 	}
   
  

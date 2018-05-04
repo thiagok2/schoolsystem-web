@@ -35,7 +35,7 @@ public class BoletimResource {
 		
 		Aluno aluno = alunoRepository.getOne(alunoId);
 		
-		if(disciplinaId!=0)
+		if(disciplinaId==0)
 			return boletimRepository.getNotas(aluno);
 		else {
 			Disciplina disciplina = disciplinaRepository.getOne(disciplinaId);

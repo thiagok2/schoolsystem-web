@@ -43,6 +43,8 @@ public class Professor{
 	private TipoProfessor tipoProfessor = TipoProfessor.EFETIVO;
 		
 	public Professor() {
+		
+
 		super();
 		
 	}

@@ -19,14 +19,6 @@ public class EscolaResource {
 	@Autowired
 	EscolaRepository escolaRepository;
 	
-	@RequestMapping(value="carregar", method=RequestMethod.GET)
-	public String carregar() {
-		Escola e = new Escola("IFAL-RL");
-		
-		escolaRepository.save(e);
-		return "ok";
-	}
-	
 	@RequestMapping(value="{id}",method=RequestMethod.GET)
 	public Escola buscar(@PathVariable("id") Integer id) {
 		return escolaRepository.getOne(id);

@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -31,12 +33,18 @@ public class Disciplina {
 	@Column
 	private Integer periodo;
 	
-	@ManyToMany
 	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "aluno_disciplinas",
+	joinColumns = @JoinColumn(name = "disciplina_id"),
+	inverseJoinColumns = @JoinColumn(name = "aluno_id"))
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
 	@ManyToOne
 	private Professor professor;
+	
+	@ManyToOne
+	private Curso curso;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Assunto> assuntos = new ArrayList<Assunto>();
@@ -47,8 +55,6 @@ public class Disciplina {
 	}
 	
 	public void addAluno(Aluno a){
-		a.addDisciplina(this);
-		
 		if(!alunos.contains(a))
 			alunos.add(a);
 	}
@@ -79,9 +85,9 @@ public class Disciplina {
 		return id;
 	}
 
-	/*public void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
-	}*/
+	}
 
 	public String getNome() {
 		return nome;
@@ -123,6 +129,14 @@ public class Disciplina {
 		this.periodo = periodo;
 	}
 
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -151,24 +165,12 @@ public class Disciplina {
 		if (alunos == null) {
 			if (other.alunos != null)
 				return false;
-		} else if (!alunos.equals(other.alunos))
-			return false;
-		if (assuntos == null) {
-			if (other.assuntos != null)
-				return false;
-		} else if (!assuntos.equals(other.assuntos))
-			return false;
-		if (id != other.id)
+		}if (id != other.id)
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
-			return false;
-		if (professor == null) {
-			if (other.professor != null)
-				return false;
-		} else if (!professor.equals(other.professor))
 			return false;
 		return true;
 	}

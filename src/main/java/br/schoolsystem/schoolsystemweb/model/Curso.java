@@ -34,7 +34,7 @@ public class Curso implements Serializable {
 	@JsonIgnore
 	@OneToMany
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
-	
+
 	
 	public Curso() {
 		super();
@@ -83,6 +83,11 @@ public class Curso implements Serializable {
 		this.disciplinas = disciplinas;
 	}
 	
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

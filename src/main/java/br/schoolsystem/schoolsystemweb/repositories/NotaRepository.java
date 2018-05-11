@@ -8,6 +8,12 @@ import br.schoolsystem.schoolsystemweb.model.Aluno;
 import br.schoolsystem.schoolsystemweb.model.Disciplina;
 import br.schoolsystem.schoolsystemweb.model.Nota;
 
+/**
+ * 
+ * @author SPRING DATA methods
+ *
+ */
+
 public interface NotaRepository extends JpaRepository<Nota, Integer>{
 	
 	public List<Nota> findByAlunoAndDisciplina(Aluno a, Disciplina d);

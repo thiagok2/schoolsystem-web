@@ -29,6 +29,14 @@
 					    </div>
 					    
 					    <div class="form-group">  
+					    	<label th:text="Sexo"></label>
+					    	
+							<input type="radio" th:field="*{sexo}" value="M" class="form-input"/>Masculino
+							<input type="radio" th:field="*{sexo}" value="F" class="form-input"/>Feminino
+  								
+					    </div>
+					    
+					    <div class="form-group">  
 					          <label th:text="Nascimento"></label>
 					          <input class="form-control" type="date" th:field="*{dataNascimento}" />
 					    </div>
@@ -37,6 +45,8 @@
 					    	<label th:text="'Fluxo Normal'"></label>
   							<input type="checkbox" th:field="*{fluxoNormal}" />
 					    </div>
+					    
+					    
 					    
 					    <div class="form-check">  
 					    	<ul th:each="bolsa: ${tiposAlunosAll}" class="list-unstyled">

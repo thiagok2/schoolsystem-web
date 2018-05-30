@@ -2,7 +2,6 @@ package br.schoolsystem.schoolsystemweb.controllers;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -10,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.schoolsystem.schoolsystemweb.model.Aluno;
 import br.schoolsystem.schoolsystemweb.model.Disciplina;
@@ -23,6 +24,7 @@ import br.schoolsystem.schoolsystemweb.model.enums.TipoDeAluno;
 import br.schoolsystem.schoolsystemweb.repositories.AlunoRepository;
 import br.schoolsystem.schoolsystemweb.repositories.DisciplinaRepository;
 import br.schoolsystem.schoolsystemweb.sersvice.EnderecoService;
+import br.schoolsystem.schoolsystemweb.validators.AlunoValidator;
 
 @Controller
 @RequestMapping("/aluno")
@@ -36,6 +38,13 @@ public class AlunoController {
 	
 	@Autowired
 	EnderecoService enderecoService;
+	
+	
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.setValidator(new AlunoValidator());
+	}
 	
 	@RequestMapping(value= "/list", method=RequestMethod.GET)
 	public String listAluno(ModelMap model) {
@@ -67,7 +76,8 @@ public class AlunoController {
 	
 	@RequestMapping(value = { "/save" }, method = RequestMethod.POST)
 	public String saveAluno(@Valid @ModelAttribute Aluno aluno, BindingResult result,
-							ModelMap model) {
+							ModelMap model,
+							RedirectAttributes attributes) {
 		
 		System.out.println(aluno);
 		
@@ -78,6 +88,9 @@ public class AlunoController {
 		alunoRepository.saveAndFlush(aluno);
 		
 		model.addAttribute("mensagem", "Aluno " + aluno.getNome() + " registrado com sucesso");
+		
+		attributes.addFlashAttribute("msg", "flash attributes");
+		
 		
 		return "redirect:/aluno/list";
 	}

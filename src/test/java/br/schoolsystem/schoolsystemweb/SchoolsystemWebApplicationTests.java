@@ -59,7 +59,6 @@ public class SchoolsystemWebApplicationTests {
 	public void testAluno(){
 		
 		Aluno aluno = new Aluno("0002");
-		aluno.setIdade(19);
 		aluno.setNome("Bruna");
 		aluno.setSexo('F');
 		aluno.setTipoDeAluno(TipoDeAluno.BOLSAASSISTENCIA);

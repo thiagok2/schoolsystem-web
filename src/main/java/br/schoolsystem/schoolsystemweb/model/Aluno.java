@@ -18,6 +18,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Positive;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,21 +39,24 @@ public class Aluno{
 	private Integer id;
 	
 	@Column
+	@NotEmpty
 	private String nome;
-	
-	@Column
-	private int idade;
 	
 	@Column
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Past
 	private Date  dataNascimento;
 	
 	@Column
-	private char sexo;
+	@NotNull
+	private Character sexo;
 
 	@Column
 	private String matricula;
+	
+	@Email
+	private String email;
 	
 	@Column
 	private Boolean fluxoNormal = true;
@@ -135,19 +146,11 @@ public class Aluno{
 		this.nome = nome;
 	}
 
-	public int getIdade() {
-		return idade;
-	}
-
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
-
-	public char getSexo() {
+	public Character getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(char sexo) {
+	public void setSexo(Character sexo) {
 		this.sexo = sexo;
 	}
 
@@ -176,6 +179,15 @@ public class Aluno{
 		this.curso = curso;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 	public void addDisciplina(Disciplina disciplina) {
 		if(!disciplinas.contains(disciplina)) {
 			//disciplina.addAluno(this);
@@ -185,7 +197,7 @@ public class Aluno{
 
 	@Override
 	public String toString() {
-		return "Aluno [id=" + id + ", nome=" + nome + ", idade=" + idade + ", sexo=" + sexo + ", matricula=" + matricula
+		return "Aluno [id=" + id + ", nome=" + nome +  ", sexo=" + sexo + ", matricula=" + matricula
 				+ ", disciplinas=" + disciplinas + ", telefones=" + telefones + ", tipoDeAluno=" + tipoDeAluno
 				+ ", endereco=" + endereco + "]";
 	}
@@ -197,7 +209,6 @@ public class Aluno{
 		result = prime * result + ((disciplinas == null) ? 0 : disciplinas.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + idade;
 		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + sexo;

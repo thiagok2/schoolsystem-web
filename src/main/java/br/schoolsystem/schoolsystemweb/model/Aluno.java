@@ -19,13 +19,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -40,7 +37,11 @@ public class Aluno{
 	
 	@Column
 	@NotEmpty
+	@Size(min=3, max=50)
 	private String nome;
+	
+	@Size(min=6, max=50)
+	private String password;
 	
 	@Column
 	@Temporal(TemporalType.DATE)
@@ -187,6 +188,14 @@ public class Aluno{
 		this.email = email;
 	}
 
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public void addDisciplina(Disciplina disciplina) {
 		if(!disciplinas.contains(disciplina)) {

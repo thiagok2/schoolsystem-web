@@ -20,11 +20,11 @@ public class AlunoValidator implements Validator{
 
 	@Override
 	public void validate(Object object, Errors errors) {
-		Aluno aluno = (Aluno)object;
+		//Aluno aluno = (Aluno)object;
 		
-		LocalDate date = aluno.getDataNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		//LocalDate date = aluno.getDataNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "matricula", "field.required");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "matricula", "field.required");
 		
 		/*
 		if(aluno.getTelefones() == null || aluno.getTelefones().isEmpty())

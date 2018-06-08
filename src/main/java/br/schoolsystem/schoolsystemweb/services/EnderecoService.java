@@ -1,4 +1,4 @@
-package br.schoolsystem.schoolsystemweb.sersvice;
+package br.schoolsystem.schoolsystemweb.services;
 
 import java.util.Arrays;
 import java.util.List;

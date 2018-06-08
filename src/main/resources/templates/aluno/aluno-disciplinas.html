@@ -43,6 +43,14 @@
 						    	<label th:text="'Fluxo Normal'"></label>
 	  							<input type="checkbox" th:field="${aluno.fluxoNormal}" disabled="disabled"/>
 						    </div>
+						    
+						    <div class="form-group"> 
+							    <form th:action="@{/aluno/uploadFile}"
+									method="post" enctype="multipart/form-data">
+									<input type="file" name="anexo" />
+									<input type="submit" value="enviar"/>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>

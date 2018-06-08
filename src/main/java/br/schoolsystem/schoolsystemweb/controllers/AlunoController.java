@@ -1,21 +1,23 @@
 package br.schoolsystem.schoolsystemweb.controllers;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.schoolsystem.schoolsystemweb.model.Aluno;
@@ -23,8 +25,7 @@ import br.schoolsystem.schoolsystemweb.model.Disciplina;
 import br.schoolsystem.schoolsystemweb.model.enums.TipoDeAluno;
 import br.schoolsystem.schoolsystemweb.repositories.AlunoRepository;
 import br.schoolsystem.schoolsystemweb.repositories.DisciplinaRepository;
-import br.schoolsystem.schoolsystemweb.sersvice.EnderecoService;
-import br.schoolsystem.schoolsystemweb.validators.AlunoValidator;
+import br.schoolsystem.schoolsystemweb.services.EnderecoService;
 
 @Controller
 @RequestMapping("/aluno")
@@ -39,22 +40,21 @@ public class AlunoController {
 	@Autowired
 	EnderecoService enderecoService;
 	
-	
-	
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.setValidator(new AlunoValidator());
+	@RequestMapping(value= "/testError", method=RequestMethod.GET)
+	public String testException(@RequestParam(required=false) Integer param) {
+		if(param == null){
+			throw new DataAccessException("Que merda! Deu erro") {};
+		}
+		
+		return "aluno/new";
 	}
+	
 	
 	@RequestMapping(value= "/list", method=RequestMethod.GET)
 	public String listAluno(ModelMap model) {
-		
 		List<Aluno> alunos = alunoRepository.findAll();
-		
 		model.addAttribute("alunosList", alunos);
-		
 		model.addAttribute("message", "Lista de alunos");
-		
 		
 		return "aluno/list";
 	}
@@ -75,7 +75,7 @@ public class AlunoController {
 	}
 	
 	@RequestMapping(value = { "/save" }, method = RequestMethod.POST)
-	public String saveAluno(@Valid @ModelAttribute Aluno aluno, BindingResult result,
+	public String saveAluno(@Valid Aluno aluno, BindingResult result,
 							ModelMap model,
 							RedirectAttributes attributes) {
 		
@@ -169,6 +169,19 @@ public class AlunoController {
 		return "redirect:/aluno/aluno-disciplinas?alunoId="+aluno.getId();
 	}
 	
+	@PostMapping("/uploadFile")
+	public String handleFileUpload(@RequestParam("anexo") MultipartFile file){
+		if (!file.isEmpty()){
+			String name = file.getOriginalFilename();
+			try{
+				byte[] bytes = file.getBytes();
+				Files.write(new File(name).toPath(), bytes);
+			}catch (Exception e){
+			e.printStackTrace();
+				}
+		}
+		return "redirect:/aluno/list";
+	}
 	
 	
 	

@@ -15,17 +15,42 @@
 	
 	</body>
 		<div class="container">
+			<h1>
+				<label th:text="#{app.title}"></label>
+			</h1>
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3">
-					<form action="#" th:action="@{/aluno/save}" th:object="${aluno}" method="POST">
+					<form th:action="@{/aluno/save}" th:object="${aluno}" method="POST">
+					    <div>
+					    	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}"
+								th:class="alert alert-success">Dados incorretos</p>
+					    </div>
+					    
 					    <div class="form-group">
+					    	
 					    	<label th:text="Matricula"></label>
 					        <input class="form-control" type="number" th:field="*{matricula}" />
 					    </div>
 					    
 					    <div class="form-group">        
-					    	<label th:text="Nome"></label>
+					    	<label th:text="Nome" th:classappend="${#fields.hasErrors('nome')}? 'has-error'"></label>
 					    	<input class="form-control" type="text" th:field="*{nome}" />
+					    	
+					    	<p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:class="text-danger">Dados incorretos</p>
+					    </div>
+					    
+					    <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">        
+					    	<label th:text="Email"></label>
+					    	<input class="form-control" type="email" th:field="*{email}" />
+					    	
+					    	<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:class="text-danger">Dados incorretos</p>
+					    </div>
+					    
+					    <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error'">        
+					    	<label th:text="Password"></label>
+					    	<input class="form-control" type="password" th:field="*{password}" />
+					    	
+					    	<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:class="text-danger">Dados incorretos</p>
 					    </div>
 					    
 					    <div class="form-group">  
@@ -36,7 +61,7 @@
   								
 					    </div>
 					    
-					    <div class="form-group">  
+					    <div class="form-group" th:classappend="${#fields.hasErrors('dataNascimento')}? 'has-error'">  
 					          <label th:text="Nascimento"></label>
 					          <input class="form-control" type="date" th:field="*{dataNascimento}" />
 					    </div>

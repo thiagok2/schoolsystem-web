@@ -10,5 +10,7 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
 	
 	/*SPRING DATA*/
 	List<Curso> findByNomeContaining(String nome);
+	
+	
 
 }

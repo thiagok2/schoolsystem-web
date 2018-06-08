@@ -20,12 +20,12 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(DataAccessException.class)
 	public String handleDataAccessException(HttpServletRequest request, DataAccessException ex){
-		logger.info("DataAccessException Occurred:: URL="+request.getRequestURL());
+		logger.info("DataAccessException:: URL="+request.getRequestURL());
 		return "error/db_error";
 	}
 	@ExceptionHandler(ServletRequestBindingException.class)
 	public String servletRequestBindingException(ServletRequestBindingException e) {
-		logger.error("ServletRequestBindingException occurred: "+e.getMessage());
+		logger.error("ServletRequestBindingException: "+e.getMessage());
 		return "error/validation_error";
 	}
 }

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<title>SpringBoot Security</title>
+	</head>
+	
+	<body>
+		<p>Bem vindo <span sec:authentication="principal.username">Usuário</span></p>
+		<p><a th:href="@{/logout}">Sair</a></p>
+		
+		
+		<div sec:authorize="hasRole('ROLE_ADMIN')">
+			<h3>Somente para os administradores</h3>
+			<p><a th:href="@{/admin/home}">Admin Home</a></p>
+		</div>
+	
+	</body>
+</html>

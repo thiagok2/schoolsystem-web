@@ -76,19 +76,19 @@ public class SchoolsystemWebApplicationTests {
 		
 		aluno.setEndereco(e);
 		
-		//alunoRepository.save(aluno);
+		alunoRepository.save(aluno);
 	}
 	
 	@Test
 	@Transactional
 	public void testCurso() {
 		
-		Curso c = cursoRepository.getOne(2);
+		//Curso c = cursoRepository.getOne(2);
 	
-		Aluno a = alunoRepository.getOne(1);
+		//Aluno a = alunoRepository.getOne(1);
 		
 		
-		c.getAlunos().add(a);
+		//c.getAlunos().add(a);
 
 		
 		//cursoRepository.saveAndFlush(c);
@@ -101,9 +101,9 @@ public class SchoolsystemWebApplicationTests {
 		
 		e.setNome("IFAL - RL");
 		
-		Curso c = cursoRepository.getOne(2);
+		//Curso c = cursoRepository.getOne(2);
 		
-		e.getCursos().add(c);
+		//e.getCursos().add(c);
 		
 		//escolaRepository.saveAndFlush(e);
 		

@@ -15,20 +15,20 @@ import org.springframework.web.client.RestTemplate;
 import br.schoolsystem.schoolsystemweb.model.Aluno;
 import br.schoolsystem.schoolsystemweb.model.Curso;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class RestTest {
 	private static final String ROOT_URL = "http://localhost:8080";
 	RestTemplate restTemplate = new RestTemplate();
 	
-	@Test
+	//@Test
 	public void testGetAllAlunos(){
 		ResponseEntity<Aluno[]> responseEntity = restTemplate.getForEntity(ROOT_URL+"/api/aluno/listar", Aluno[].class);
 		List<Aluno> alunos = Arrays.asList(responseEntity.getBody());
 		assertNotNull(alunos);
 	}
 	
-	@Test
+	//@Test
 	public void testCreateCurso(){
 		Curso curso = new Curso();
 		curso.setNome("Geografia");

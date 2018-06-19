@@ -49,7 +49,6 @@ public class AlunoController {
 		return "aluno/new";
 	}
 	
-	
 	@RequestMapping(value= "/list", method=RequestMethod.GET)
 	public String listAluno(ModelMap model) {
 		List<Aluno> alunos = alunoRepository.findAll();

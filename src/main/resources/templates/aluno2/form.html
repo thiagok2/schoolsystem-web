@@ -4,23 +4,27 @@
 		<meta charset="UTF-8">
 		
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-		
 		<title>Insert title here</title>
 	</head>
 	
 	</body>
 		<div class="container">
 			<h1>
-				<label th:text="#{app.title}"></label>
+				<label th:text="#{app.title}"></label>2
 			</h1>
+			
+			
+			<div id="alertTop" class="alert alert-warning alert-dismissible fade" role="alert" style="display:none">
+			  <span id="messageAlert">s</span>
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			
+			
 			<div class="row">
-				<div class="col-md-6 col-md-offset-3">
-					<form th:action="@{/aluno/save}" th:object="${aluno}" method="POST">
+				<div class="col-md-5">
+					<form th:object="${aluno}" method="POST" id="formAluno">
 					    <div>
 					    	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}"
 								th:class="alert alert-success">Dados incorretos</p>
@@ -29,7 +33,7 @@
 					    <div class="form-group">
 					    	
 					    	<label th:text="Matricula"></label>
-					        <input class="form-control" type="number" th:field="*{matricula}" />
+					        <input class="form-control" type="number" th:field="*{matricula}"/>
 					    </div>
 					    
 					    <div class="form-group">        
@@ -97,9 +101,37 @@
 					    <input type="submit" value="Enviar" class="btn btn-primary"/>
  
 					</form>
+				</div><!-- end col -->
+				
+				<div class="col-md-5">
+					<table class="table table-striped table-hover table-sm">
+				    	<thead>
+					      	<tr>
+					      		<th>#</th>
+						        <th>Códido</th>
+						        <th>Nome</th>
+						        <th>Nascimento</th>
+						        <th>Matricula</th>
+						         <th>Ação</th>
+					      	</tr>
+				    	</thead>
+				    	<tbody id="resultList">
+				    		
+				    	</tbody>
+				    </table>
 				</div>
-			</div>
+				
+			</div><!-- end row -->
+			
 		</div>
 		<div th:insert="~{footer :: copy}"></div>
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+		
+		<script type="text/javascript" src="/js/aluno/postrequest.js"></script>
+		<link rel="stylesheet" href="/style.css">
 	</body>
 </html>

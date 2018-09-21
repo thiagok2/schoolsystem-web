@@ -1,21 +1,20 @@
 package br.schoolsystem.schoolsystemweb;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import br.schoolsystem.schoolsystemweb.model.Aluno;
-import br.schoolsystem.schoolsystemweb.model.Assunto;
-import br.schoolsystem.schoolsystemweb.model.Curso;
 import br.schoolsystem.schoolsystemweb.model.Disciplina;
-import br.schoolsystem.schoolsystemweb.model.DisciplinaNota;
 import br.schoolsystem.schoolsystemweb.model.Endereco;
 import br.schoolsystem.schoolsystemweb.model.Escola;
 import br.schoolsystem.schoolsystemweb.model.Nota;
@@ -28,11 +27,15 @@ import br.schoolsystem.schoolsystemweb.repositories.DisciplinaRepository;
 import br.schoolsystem.schoolsystemweb.repositories.EscolaRepository;
 import br.schoolsystem.schoolsystemweb.repositories.NotaRepository;
 import br.schoolsystem.schoolsystemweb.repositories.ProfessorRepository;
-import br.schoolsystem.schoolsystemweb.repositories.custom.BoletimRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+//@SpringBootTest
+@DataJpaTest
+@TestPropertySource(locations="classpath:test.properties")
 public class SchoolsystemWebApplicationTests {
+	
+	@Rule
+    public ExpectedException thrown = ExpectedException.none();
 
 	@Autowired
 	private CursoRepository cursoRepository;
@@ -52,14 +55,14 @@ public class SchoolsystemWebApplicationTests {
 	@Autowired
 	private DisciplinaRepository disciplinaRepository;
 	
-	@Autowired
-	private BoletimRepository boletimRepository;
+//	@Autowired
+//	private BoletimRepositoryImpl boletimRepository;
 	
 	@Test
 	public void testAluno(){
 		
-		Aluno aluno = new Aluno("0002");
-		aluno.setNome("Bruna");
+		Aluno aluno = new Aluno("0069");
+		aluno.setNome("Tayna2");
 		aluno.setSexo('F');
 		aluno.setTipoDeAluno(TipoDeAluno.BOLSAASSISTENCIA);
 		
@@ -79,8 +82,8 @@ public class SchoolsystemWebApplicationTests {
 		alunoRepository.save(aluno);
 	}
 	
-	@Test
-	@Transactional
+	//@Test
+	//@Transactional
 	public void testCurso() {
 		
 		//Curso c = cursoRepository.getOne(2);
@@ -94,8 +97,8 @@ public class SchoolsystemWebApplicationTests {
 		//cursoRepository.saveAndFlush(c);
 	}
 	
-	@Test
-	@Transactional
+	//@Test
+	//@Transactional
 	public void testEscola() {
 		Escola e = new Escola();
 		
@@ -218,23 +221,17 @@ public class SchoolsystemWebApplicationTests {
 		Aluno a = alunoRepository.findAll().get(0);
 		
 		
-		List<Nota> notas = boletimRepository.getNotas(a,d);
 		
-		System.out.println(notas.size());
-		
-		System.out.println(notas.get(0).getValor());
 		
 	}
 	
-	@Test
-	@Transactional
+	//@Test
+	//@Transactional
 	public void testDisciplinaNota(){
 		
 		Aluno a = alunoRepository.findAll().get(0);
 		
-		List<DisciplinaNota> disciplinasNotas = boletimRepository.getDisciplinaNota(a);
 		
-		System.out.println(">>"+disciplinasNotas.size());
 		
 	}
 

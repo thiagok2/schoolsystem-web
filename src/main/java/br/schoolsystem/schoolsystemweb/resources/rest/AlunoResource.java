@@ -35,8 +35,10 @@ public class AlunoResource {
 	}
 	   
 	@GetMapping("/listar")
-	public List<Aluno> listar() {
-		return alunoRepositoty.findAll();
+	public ResponseEntity<List<Aluno>> listar() {
+		
+		ResponseEntity<List<Aluno>> response = new ResponseEntity<List<Aluno>>(alunoRepositoty.findAll(), HttpStatus.OK);
+		return response;
 	}
   
  
@@ -47,10 +49,11 @@ public class AlunoResource {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/salvar")
-	public Aluno salvar(@RequestBody @Valid Aluno aluno, BindingResult results){
+	public ResponseEntity<Aluno> salvar(@RequestBody @Valid Aluno aluno, BindingResult results){
 		Aluno alunoOk = alunoRepositoty.save(aluno);
 		
-		return alunoOk;
+		ResponseEntity<Aluno> response = new ResponseEntity<Aluno>(alunoOk, HttpStatus.OK);
+		return response;
 	}
 	
 	

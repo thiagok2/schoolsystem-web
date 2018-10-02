@@ -1,0 +1,45 @@
+GIThub: https://github.com/thiagok2/schoolsystem-web
+
+1. Editar pom.xml
+	add spring-boot-starter-thymeleaf
+	Maven... Update Project
+2. Criar pasta para páginas
+	Onde? src/main/resources
+		Criar pastas: templates, static
+		Criar subpastas em templates
+			Ex.: produto, usuario,cliente, categoria
+3. Criar o pacote controllers
+	Onde? no pacote principal(!atenção!!)
+4. Criar classes controllers
+	Ex.:  ProdutoController, 
+		ClienteController
+5. Nas novas classes:(Observar git AlunoController)
+	@Controller + @RequestMapping("/produto") !!Atenção! para não repetir @RequestMapping do Resource!
+	@Autowired no repository
+	
+	@GetMapping(value= "/list")
+	public String list(ModelMap model) {
+		List<Aluno> alunos = alunoRepository.findAll();
+		model.addAttribute("alunosList", alunos);
+		
+		return "aluno/list";
+	}
+6. Criar página list
+	Criar list.html em templates/produto
+	Inserir trechos do bootstrap no head
+	Alterar a tag <html>
+		<html xmlns:th="http://www.thymeleaf.org">
+	
+	Criar 
+		<table class="table">
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>			
+			</tr>
+			<tr th:each="a : ${alunosList}">
+				<td th:text="${a.id}"></td>
+				<td th:text="${a.nome}"></td>	
+			</tr>
+		</table>
+
+localhost:8080/produto/list

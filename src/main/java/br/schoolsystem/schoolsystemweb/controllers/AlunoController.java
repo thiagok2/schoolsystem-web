@@ -27,6 +27,7 @@ import br.schoolsystem.schoolsystemweb.model.enums.TipoDeAluno;
 import br.schoolsystem.schoolsystemweb.repositories.AlunoRepository;
 import br.schoolsystem.schoolsystemweb.repositories.DisciplinaRepository;
 import br.schoolsystem.schoolsystemweb.services.EnderecoService;
+import br.schoolsystem.schoolsystemweb.services.StoreUploadService;
 
 @Controller
 @RequestMapping("/aluno")
@@ -40,6 +41,9 @@ public class AlunoController {
 	
 	@Autowired
 	EnderecoService enderecoService;
+	
+	@Autowired
+	StoreUploadService storageService;
 	
 	@RequestMapping(value= "/testError", method=RequestMethod.GET)
 	public String testException(@RequestParam(required=false) Integer param) {
@@ -173,10 +177,8 @@ public class AlunoController {
 	@PostMapping("/uploadFile")
 	public String handleFileUpload(@RequestParam("anexo") MultipartFile file){
 		if (!file.isEmpty()){
-			String name = file.getOriginalFilename();
 			try{
-				byte[] bytes = file.getBytes();
-				Files.write(new File(name).toPath(), bytes);
+				storageService.storeFile(file);
 			}catch (Exception e){
 			e.printStackTrace();
 				}

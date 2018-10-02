@@ -12,6 +12,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +50,7 @@ public class AlunoController {
 		return "aluno/new";
 	}
 	
-	@RequestMapping(value= "/list", method=RequestMethod.GET)
+	@GetMapping(value= "/list")
 	public String listAluno(ModelMap model) {
 		List<Aluno> alunos = alunoRepository.findAll();
 		model.addAttribute("alunosList", alunos);
@@ -58,7 +59,7 @@ public class AlunoController {
 		return "aluno/list";
 	}
 	
-	@RequestMapping(value = { "/new" }, method = RequestMethod.GET)
+	@GetMapping(value = { "/new" })
 	public String newAluno(ModelMap model) {
 		
 		Aluno aluno = new Aluno();
@@ -94,7 +95,7 @@ public class AlunoController {
 		return "redirect:/aluno/list";
 	}
 	
-	@RequestMapping(value = { "/edit-{id}-aluno" }, method = RequestMethod.GET)
+	@GetMapping(value = { "/edit-{id}-aluno" })
 	public String editAluno(@PathVariable("id") Integer id, ModelMap model) {
 		Aluno aluno = alunoRepository.getOne(id);
 		model.addAttribute("aluno", aluno);
@@ -105,7 +106,7 @@ public class AlunoController {
 		return "aluno/form";
 	}
 	
-	@RequestMapping(value = { "/edit-{id}-aluno" }, method = RequestMethod.POST)
+	@PostMapping(value = { "/edit-{id}-aluno" })
 	public String updateAluno(@Valid Aluno aluno, BindingResult result, ModelMap model) {
 		if (result.hasErrors()) {
 			return "aluno/form";
@@ -118,13 +119,13 @@ public class AlunoController {
 		return "redirect:/aluno/list";
 	}
 	
-	@RequestMapping(value = { "/delete" }, method = RequestMethod.GET)
+	@GetMapping(value = { "/delete" })
 	public String deleteAluno(@RequestParam("alunoId") Integer id) {
 		alunoRepository.deleteById(id);
 		return "redirect:/aluno/list";
 	}
 	
-	@RequestMapping(value = { "/aluno-disciplinas" }, method = RequestMethod.GET)
+	@GetMapping(value = { "/aluno-disciplinas" })
 	public String alunoDisciplinas(@RequestParam("alunoId") Integer id, ModelMap model) {
 		Aluno aluno = alunoRepository.getOne(id);
 		

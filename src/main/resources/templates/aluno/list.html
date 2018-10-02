@@ -23,28 +23,26 @@
 				  	<table class="table" th:unless="${#lists.isEmpty(alunosList)}">
 				    	<thead>
 					      	<tr>
-					      		<th>#</th>
 						        <th>Códido</th>
 						        <th>Nome</th>
 						        <th>Nascimento</th>
 						        <th>Matricula</th>
-						         <th>Ação</th>
+						        <th>Ação</th>
 					      	</tr>
 				    	</thead>
 					    <tbody>
-					    	<tr th:each="a,status : ${alunosList}">
-					    		<td th:text="${status.count}"></td>
+					    	<tr th:each="a: ${alunosList}">
 						        <td th:text="${a.id}"></td>
 						        <td th:text="${a.nome}"></td>
 						        <td th:text="${#dates.format(a.dataNascimento, 'dd-MM-yyyy')}"></td>
 						        <td th:text="${a.matricula}"></td>
 						        <td>
 						        	<a href="aluno/form.html" th:href="@{'/aluno/edit-'+${a.id}+'-aluno'}">
-						        		edit
+						        		editar
 						        	</a>
 						        	
 						        	<a href="aluno/list.html"   th:href="@{/aluno/delete(alunoId=${a.id})}" >
-						        		delete
+						        		excluir
 						        	</a>
 						        </td>
 						      	

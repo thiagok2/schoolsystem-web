@@ -101,6 +101,7 @@ public class AlunoController {
 		model.addAttribute("edit", true);
 		
 		model.addAttribute("tiposAlunosAll", Arrays.asList(TipoDeAluno.ALL));
+		model.addAttribute("municipioAll", enderecoService.getMunicipios());
 		return "aluno/form";
 	}
 	
